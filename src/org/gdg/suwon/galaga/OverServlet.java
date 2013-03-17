@@ -25,24 +25,56 @@ public class OverServlet extends HttpServlet {
 		List<Player> players = room.getPlayers();
 		Integer countEnd = 0;
 		
+		Long blueScore = (long)0;
+		Long redScore = (long)0;
+		
 		for(Player player : players){
 			if(player.getId().equals(userId)){
 				//change status into END
 				player.setState(PlayerState.END);
 				resp.getWriter().write("{\"status\" : \"success\"}");
-				continue;
-			}else{
-				if(player.getState() != PlayerState.END){
-					break;
+				
+				if(player.getTeam().equals("BLUE")){
+					blueScore += player.getScore();
 				}else{
-					countEnd++;
-					if(countEnd == players.size()){
-						RoomMgr.getRoom("gdgSuwon").setState(RoomState.END);
-						resp.getWriter().write("{\"status\" : \"GameEnd\"}");
-					}
+					redScore += player.getScore();
 				}
+				
+				
+				continue;
 			}
 		}
+		
+		if(isGameOver(players)){
+			room.setState(RoomState.END);
+			room.validate();
+			
+			for(Player player : players){
+				if(player.getTeam().equals((blueScore>redScore?"BLUE":"RED"))){
+					player.increaseWins();
+				}else{
+					player.increaseLoses();
+				}
+				
+				player.addTotalScore(player.getScore());
+				player.setState(PlayerState.IDLE);
+				player.validate();
+			}
+			
+		}
+		
+	}
+	
+	private boolean isGameOver(List<Player> players_){
+		boolean isGameOver = true;
+		
+		for(Player player : players_){
+			if(player.getState().equals(PlayerState.PLAYING)){
+				return false;
+			}
+		}
+		
+		return isGameOver;
 	}
 
 

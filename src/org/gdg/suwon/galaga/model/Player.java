@@ -6,6 +6,7 @@ import com.google.appengine.api.datastore.Entity;
 public class Player extends EntityData {
 	
 	public static final String KEY_SCORE = "SCORE";
+	public static final String KEY_TOTAL_SCORE = "TOTALSCORE";
 	public static final String KEY_WINS = "WINS";
 	public static final String KEY_LOSES = "LOSES";
 	
@@ -17,6 +18,8 @@ public class Player extends EntityData {
 	
 	private Long wins = (long)0;
 	private Long loses = (long)0;
+	
+	private Long totalScore = (long)0;
 	
 	private String team;
 	
@@ -30,6 +33,7 @@ public class Player extends EntityData {
 		entity.setProperty(KEY_WINS, wins);
 		entity.setProperty(KEY_LOSES, loses);
 		entity.setProperty("TEAM", team);
+		entity.setProperty(KEY_TOTAL_SCORE, totalScore);
 	}
 	
 	public Player(Entity entity_){
@@ -40,6 +44,7 @@ public class Player extends EntityData {
 		loses = (Long)entity.getProperty(KEY_LOSES);
 		wins = (Long)entity.getProperty(KEY_WINS);
 		team = (String)entity.getProperty("TEAM");
+		totalScore = (Long)entity.getProperty(KEY_TOTAL_SCORE);
 	}
 
 	public String getId() {
@@ -76,5 +81,13 @@ public class Player extends EntityData {
 	
 	public String getTeam(){
 		return team;
+	}
+
+	public Long getTotalScore() {
+		return totalScore;
+	}
+
+	public void addTotalScore(Long totalScore) {
+		this.totalScore += totalScore;
 	}
 }
