@@ -50,5 +50,23 @@
 		<servlet-name>Over</servlet-name>
 		<url-pattern>/over</url-pattern>
 	</servlet-mapping>
- 
+ <!-- PlayerInfo -->	
+	<servlet>
+		<servlet-name>PlayerInfo</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.PlayerInfoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PlayerInfo</servlet-name>
+		<url-pattern>/playerinfo</url-pattern>
+	</servlet-mapping>
+ <!-- RoomInfo -->	
+	<servlet>
+		<servlet-name>RoomInfo</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.RoomInfoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RoomInfo</servlet-name>
+		<url-pattern>/roominfo</url-pattern>
+	</servlet-mapping>
+  
 </web-app>
