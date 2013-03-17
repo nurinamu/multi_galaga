@@ -63,6 +63,7 @@ public class Room extends EntityData{
 	
 	public void addPlayer(Player newPlayer_){
 		players.add(newPlayer_.toEntity().getKey());
+		entity.setProperty(KEY_PLAYERS, players);
 		validate();
 	}
 	
