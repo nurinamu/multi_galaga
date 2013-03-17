@@ -12,9 +12,10 @@ import org.gdg.suwon.galaga.model.Player;
 import org.gdg.suwon.galaga.model.PlayerState;
 import org.gdg.suwon.galaga.model.Room;
 import org.gdg.suwon.galaga.model.RoomMgr;
+import org.gdg.suwon.galaga.model.RoomState;
 
-public class ReadyServlet extends HttpServlet {
-	
+public class OverServlet extends HttpServlet {
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -22,15 +23,30 @@ public class ReadyServlet extends HttpServlet {
 		String userId = req.getParameter("id");
 		Room room = RoomMgr.getRoom("gdgSuwon");
 		List<Player> players = room.getPlayers();
+		Boolean sentSuccess = false;
+		Boolean allEnd = false;
+		Integer countEnd = 0;
+		
 		for(Player player : players){
 			if(player.getId().equals(userId)){
-				//change status into Ready
-				player.setState(PlayerState.READY);
+				//change status into END
+				player.setState(PlayerState.END);
 				resp.getWriter().write("{status : success}");
-				break;
+				sentSuccess = true;
+				continue;
 			}else{
-				resp.getWriter().write("{status : fail}");
+				if(player.getState() != PlayerState.END){
+					break;
+				}else{
+					countEnd++;
+					if(countEnd == players.size()){
+						RoomMgr.getRoom("gdgSuwon").setState(RoomState.END);
+						resp.getWriter().write("{status : Game End}");
+					}
+				}
 			}
 		}
 	}
+
+
 }

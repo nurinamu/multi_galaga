@@ -22,7 +22,8 @@
 	 <servlet-name>SystemServiceServlet</servlet-name>
 	 <url-pattern>/_ah/spi/*</url-pattern>
 	</servlet-mapping>
-	
+
+<!-- Enter -->	
 	<servlet>
 		<servlet-name>Enter</servlet-name>
 		<servlet-class>org.gdg.suwon.galaga.EnterServlet</servlet-class>
@@ -31,7 +32,23 @@
 		<servlet-name>Enter</servlet-name>
 		<url-pattern>/enter</url-pattern>
 	</servlet-mapping>
-	 
- 
+<!-- Ready -->	
+	<servlet>
+		<servlet-name>Ready</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.ReadyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Ready</servlet-name>
+		<url-pattern>/ready</url-pattern>
+	</servlet-mapping>
+ <!-- Over -->	
+	<servlet>
+		<servlet-name>Over</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.OverServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Over</servlet-name>
+		<url-pattern>/over</url-pattern>
+	</servlet-mapping>
  
 </web-app>

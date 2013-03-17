@@ -22,15 +22,20 @@ public class EnterServlet extends HttpServlet {
 		Room room = RoomMgr.getRoom("gdgSuwon");
 		List<Player> players = room.getPlayers();
 		String roomToken = room.getToken();
+		Boolean samePlayer = false;
 		for(Player player : players){
-			if(player.getID().equals(userId)){
+			if(player.getId().equals(userId)){
 				//send error.
 				resp.getWriter().write("{status : fail, msg: duplicate id, id:"+null+", token:"+roomToken+"}");
+				samePlayer = true;
+				break;
 			}else{
-				//send success
-				resp.getWriter().write("{status : success, msg :"+null+", id:"+userId+", token:"+roomToken+"}");
+				samePlayer = false;
 			}
 		}
+		if(!samePlayer){
+			//send success
+			resp.getWriter().write("{status : success, msg :"+null+", id:"+userId+", token:"+roomToken+"}");
+		}
 	}
-
 }
