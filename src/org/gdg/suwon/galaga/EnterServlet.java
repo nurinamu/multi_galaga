@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.gdg.suwon.galaga.model.Player;
+import org.gdg.suwon.galaga.model.PlayerMgr;
 import org.gdg.suwon.galaga.model.Room;
 import org.gdg.suwon.galaga.model.RoomMgr;
 
@@ -39,6 +40,8 @@ public class EnterServlet extends HttpServlet {
 		}
 		if(!samePlayer){
 			//send success
+			Player newPlayer = PlayerMgr.createNewPlayer(userId);
+			room.addPlayer(newPlayer);
 			resp.getWriter().write("{\"status\" : \"success\", \"msg\" :\""+null+"\", \"id\":\""+userId+"\", \"token\":\""+roomToken+"\"}");
 		}
 	}

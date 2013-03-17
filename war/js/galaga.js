@@ -26,6 +26,8 @@ var playerScore = 0;
 var level = 1;
 var lives;
 var stopThere = false;
+// KeyBoard
+var keybool = false;
 
 var sound0 = $('#sound0')[0]
 var sound1 = $('#sound1')[0]
@@ -189,6 +191,8 @@ function ready() {
     });
 
     $(document).keydown(function(event) {
+    	if(!keybool) 
+    		return true;
         if (event.which == 32 && intervalLoop == 0) {
             setStartGame(5);
             mouse.x = 50;
@@ -962,3 +966,18 @@ function intersect(obj) {
 function intersectOther(a, b) {
     return (a.left() <= b.right() && b.left() <= a.right() && a.top() <= b.bottom() && b.top() <= a.bottom())
 } /************* End Helpers *************/
+
+/************* Log in *************/
+
+var connect_btn = document.getElementById('connectbtn');
+
+$ = jQuery;
+$('.game_play').hide();
+$('.connect_layout').show();
+connect_btn.onclick = onClick;
+
+function onClick() {
+	$('.game_play').show();
+	$('.connect_layout').hide();
+	keybool = true;
+}
