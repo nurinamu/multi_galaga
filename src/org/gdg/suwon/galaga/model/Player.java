@@ -46,5 +46,4 @@ public class Player extends EntityData {
 		this.score = score;
 	}
 	
-	
 }
