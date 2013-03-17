@@ -189,8 +189,14 @@ function ready() {
 	});
 
 	$(document).keydown(function(event) {
-		if (!keybool)
-			return true;
+		if (!keybool) {
+			if(event.which == 13) {
+				onClick();
+				return false;
+			} else {
+				return true;
+			}
+		}
 		if (event.which == 32 && intervalLoop == 0) {
 			setStartGame(5);
 			mouse.x = 50;
