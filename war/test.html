@@ -8,27 +8,14 @@
     <!--<link href="css/sdbcoaMain.css" rel="stylesheet">-->
 
     <!-- Loading Bootstrap -->
-    <link href="../war/css/bootstrap.css" rel="stylesheet">
+    <link href="./css/bootstrap.css" rel="stylesheet">
 
     <!-- Loading Flat UI -->
     <!--<link href="css/flat-ui.css" rel="stylesheet">-->
     <!--<link rel="shortcut icon" href="images/favicon.ico">-->
 
 
-    <script>
-        $('#btnPost').click(function(){
-            $.ajax({
-                type: "POST",
-                url: '/enter',
-                data: {id: kabkee},
-                dataType: 'json'
-            }).success(function(data){
-                        alert(data);
-                      $('#consoleLog').append(data);
-                    })
-        })
 
-    </script>
 </head>
 <body>
     <button class="btn-warning btn" id="btnPost">PostTest</button>
@@ -37,14 +24,26 @@
 
 
     <!-- Load JS here for greater good =============================-->
-    <script src="../war/js/jquery.min.js"></script>
-    <script src="../war/js/bootstrap.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.js"></script>
 
+    <script>
+        $(function(){
+            $('#btnPost').click(function(){
+                $.ajax({
+                    type: "POST",
+                    url: '/over',
+//                    data: {id: "kabkee"},
+                    dataType: 'application/json'
+                }).success(function(data){
+                            alert(data);
+                            $('#consoleLog').append(data);
+                        })
+            })
+        })
 
-    <!--[if lt IE 8]>
-    <script src="js/js_flatui/icon-font-ie7.js"></script>
-    <script src="js/js_flatui/lte-ie7-24.js"></script>
-    <![endif]-->
+    </script>
+
     <script type="text/javascript">
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
