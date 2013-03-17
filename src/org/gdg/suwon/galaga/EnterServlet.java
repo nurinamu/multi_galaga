@@ -30,7 +30,7 @@ public class EnterServlet extends HttpServlet {
 		for(Player player : players){
 			if(player.getId().equals(userId)){
 				//send error.
-				resp.getWriter().write("{status : fail, msg: duplicate id, id:"+null+", token:"+roomToken+"}");
+				resp.getWriter().write("{status : \"fail\", msg: \"duplicate id\", id:\""+null+"\", token:\""+roomToken+"\"}");
 				samePlayer = true;
 				break;
 			}else{
@@ -39,7 +39,7 @@ public class EnterServlet extends HttpServlet {
 		}
 		if(!samePlayer){
 			//send success
-			resp.getWriter().write("{status : success, msg :"+null+", id:"+userId+", token:"+roomToken+"}");
+			resp.getWriter().write("{\"status\" : \"success\", \"msg\" :\""+null+"\", \"id\":\""+userId+"\", \"token\":\""+roomToken+"\"}");
 		}
 	}
 }
