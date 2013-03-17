@@ -3,6 +3,7 @@ package org.gdg.suwon.galaga.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.appengine.api.channel.ChannelMessage;
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -13,6 +14,9 @@ public class Room extends EntityData{
 	private static final String KEY_STATE = "STATE";
 	private static final String KEY_TITLE = "TITLE";
 	private static final String KEY_TOKEN = "TOKEN";
+	
+	public static final String PLAYER_CHANGE = "player";
+	public static final String ROOM_CHANGE = "room";
 	
 	private List<Key> players = new ArrayList<Key>();
 	private String state = RoomState.READY;
@@ -59,10 +63,12 @@ public class Room extends EntityData{
 	
 	public void addPlayer(Player newPlayer_){
 		players.add(newPlayer_.toEntity().getKey());
+		validate();
 	}
 	
 	public void setState(String newState_){
 		state = newState_;
+		validate();
 	}
 	
 	public String getState(){
@@ -71,5 +77,15 @@ public class Room extends EntityData{
 	
 	public String getToken(){
 		return token;
+	}
+
+	public void sync(){
+		sync(ROOM_CHANGE);
+	}
+	
+	public void sync(String msg_){
+		if(token != null){
+			ChannelServiceFactory.getChannelService().sendMessage(new ChannelMessage(token, "{\"type\":\"room_state_change\",\"kind\":\"room\"}"));
+		}
 	}
 }
