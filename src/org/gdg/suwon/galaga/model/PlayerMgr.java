@@ -8,10 +8,10 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
 public class PlayerMgr {
-	public static Player createNewPlayer(String id_){
+	public static Player createNewPlayer(String id_, String team_){
 		Player retPlayer = getPlayer(id_);
 		if(retPlayer == null){
-			retPlayer = new Player(id_);
+			retPlayer = new Player(id_, team_);
 			retPlayer.validate();
 		}
 		
