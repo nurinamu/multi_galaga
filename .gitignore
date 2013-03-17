@@ -1,5 +1,1 @@
 war/WEB-INF/classes/*
-war/WEB-INF/lib/*
-.settings/*
-.project
-war/WEB-INF/appengine-web.xml
