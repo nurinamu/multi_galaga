@@ -26,10 +26,10 @@ public class ReadyServlet extends HttpServlet {
 			if(player.getId().equals(userId)){
 				//change status into Ready
 				player.setState(PlayerState.READY);
-				resp.getWriter().write("{status : success}");
+				resp.getWriter().write("{\"status\" : \"success\"}");
 				break;
 			}else{
-				resp.getWriter().write("{status : fail}");
+				resp.getWriter().write("{\"status\" : \"fail\"}");
 			}
 		}
 	}

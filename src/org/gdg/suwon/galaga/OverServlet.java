@@ -23,16 +23,13 @@ public class OverServlet extends HttpServlet {
 		String userId = req.getParameter("id");
 		Room room = RoomMgr.getRoom("gdgSuwon");
 		List<Player> players = room.getPlayers();
-		Boolean sentSuccess = false;
-		Boolean allEnd = false;
 		Integer countEnd = 0;
 		
 		for(Player player : players){
 			if(player.getId().equals(userId)){
 				//change status into END
 				player.setState(PlayerState.END);
-				resp.getWriter().write("{status : success}");
-				sentSuccess = true;
+				resp.getWriter().write("{\"status\" : \"success\"}");
 				continue;
 			}else{
 				if(player.getState() != PlayerState.END){
@@ -41,7 +38,7 @@ public class OverServlet extends HttpServlet {
 					countEnd++;
 					if(countEnd == players.size()){
 						RoomMgr.getRoom("gdgSuwon").setState(RoomState.END);
-						resp.getWriter().write("{status : Game End}");
+						resp.getWriter().write("{\"status\" : \"GameEnd\"}");
 					}
 				}
 			}
