@@ -10,7 +10,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 public class PlayerMgr {
 	public static Player createNewPlayer(String id_){
 		Player retPlayer = getPlayer(id_);
-		if(retPlayer != null){
+		if(retPlayer == null){
 			retPlayer = new Player(id_);
 			retPlayer.validate();
 		}
@@ -31,7 +31,7 @@ public class PlayerMgr {
 			retPlayer = new Player(retEntity);
 		} catch (EntityNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		
 		return retPlayer;
