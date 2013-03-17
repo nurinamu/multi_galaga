@@ -2,3 +2,5 @@ war/WEB-INF/classes/*
 war/WEB-INF/lib/*
 *./DS_Store
 war/imageTest.html
+war/WEB-INF/appengine-generated/*
+.idea*

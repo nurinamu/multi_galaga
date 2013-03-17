@@ -59,7 +59,16 @@ var badGuys = new Array(); // the bad guys
 var bossFire = new Array();
 // Important interval handler!
 var intervalLoop = 0;
+var changePageStatusIntervalLoop = 0;
 var fakeGame = 0;
+
+// channel message 
+var channelMessage = {
+	'READY' : 0,
+	'PLAYING' : 1,
+	'END' : 2
+}
+
 
 var pressedKeys = {};
 var bulletsControl = {};
@@ -189,8 +198,14 @@ function ready() {
 	});
 
 	$(document).keydown(function(event) {
-		if (!keybool)
-			return true;
+		if (!keybool) {
+			if(event.which == 13) {
+				onClick();
+				return false;
+			} else {
+				return true;
+			}
+		}
 		if (event.which == 32 && intervalLoop == 0) {
 			setStartGame(5);
 			mouse.x = 50;
@@ -332,6 +347,7 @@ function initGalaga() {
 	}
 
 	intervalLoop = setInterval(drawGalaga, 20);
+	changePageStatusIntervalLoop = setInterval(changePageState, 1000);
 }
 
 /**
@@ -1078,3 +1094,54 @@ function game_Ready_Click() {
 		});
 	}
 }
+
+/** channel status related function **/
+function pickupChannelMessage()
+{
+	var result = 0;
+
+	// url must be specified manually! 
+	// please consider this line to add a specific url
+
+	$.ajax (
+			{
+				type: "POST",
+				url: "/enter",
+				data : user_id.value
+			},
+			success : function(msg)
+			{
+				var obj = jQuery.parseJSON ( msg );
+				alert ( obj.status );
+
+				result = obj.status;
+			},
+			error : function ( xhr, status, error )
+			{
+				alert ( "Unknown message!" );
+				result = null;
+			}
+			);
+
+	return result;
+}
+
+function channelPageState ()
+{
+	var channelStatus = pickupChannelMessage();
+
+	// TODO : specify behavior if server message is delived.
+	switch ( serverMessage [ channelStatus ] )
+	{
+		case 0: // READY
+			break;
+		case 1: // PLAYING
+			break;
+		case 2: // END
+			break;
+		default:
+			break;
+	}
+}
+/* end of function list */
+
