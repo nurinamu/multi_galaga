@@ -1034,6 +1034,9 @@ $('.game_play').hide();
 $('.connect_layout').show();
 connect_btn.onclick = onClick;
 
+//$('.game_play').show();
+//$('.connect_layout').hide();
+
 function onClick() {
 	$.ajax({
 		type : "POST",
@@ -1042,14 +1045,28 @@ function onClick() {
 			id : user_id.value
 		},
 		success : function(msg) {
-			alert("success" + msg);
+//			alert("success" + msg);
+			$('.game_play').show();
+			$('.connect_layout').hide();
+			keybool = true;
 		},
 		error : function(xhr, status, error) {
 			alert("fail");
 		}
 	});
+}
 
-	$('.game_play').show();
-	$('.connect_layout').hide();
-	keybool = true;
+/** *********** Game Ready ************ */
+var connect_btn = document.getElementById('game_ready_btn');
+connect_btn.innerHTML = "please, be Ready!";
+connect_btn.onclick = game_Ready_Click;
+
+function game_Ready_Click() {
+	if (connect_btn.className == "btn btn-success") {
+		connect_btn.className = "btn btn-warning";
+		connect_btn.innerHTML = "please, be Ready!";
+	} else {
+		connect_btn.className = "btn btn-success";
+		connect_btn.innerHTML = "Ready";
+	}
 }
