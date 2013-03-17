@@ -68,5 +68,25 @@
 		<servlet-name>RoomInfo</servlet-name>
 		<url-pattern>/roominfo</url-pattern>
 	</servlet-mapping>
+	
+	<!-- RoomInfo -->	
+	<servlet>
+		<servlet-name>Image</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.ImageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Image</servlet-name>
+		<url-pattern>/image</url-pattern>
+	</servlet-mapping>
+	
+	<!-- RoomInfo -->	
+	<servlet>
+		<servlet-name>Rank</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.RankServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Rank</servlet-name>
+		<url-pattern>/rank</url-pattern>
+	</servlet-mapping>
   
 </web-app>
