@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.gdg.suwon.galaga.model.Player;
 import org.gdg.suwon.galaga.model.PlayerMgr;
+import org.gdg.suwon.galaga.model.PlayerState;
 import org.gdg.suwon.galaga.model.Room;
 import org.gdg.suwon.galaga.model.RoomMgr;
 
@@ -29,7 +30,7 @@ public class EnterServlet extends HttpServlet {
 		String roomToken = room.getToken();
 		Boolean samePlayer = false;
 		for(Player player : players){
-			if(player.getId().equals(userId)){
+			if(player.getId().equals(userId) && !player.getState().equals(PlayerState.IDLE)){
 				//send error.
 				resp.getWriter().write("{status : \"fail\", token:\""+roomToken+"\"}");
 				samePlayer = true;
