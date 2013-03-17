@@ -40,7 +40,11 @@ public class EnterServlet extends HttpServlet {
 		}
 		if(!samePlayer){
 			//send success
-			Player newPlayer = PlayerMgr.createNewPlayer(userId);
+			String team="BLUE";
+			if(players.size()%2 == 1){
+				team = "RED";
+			}
+			Player newPlayer = PlayerMgr.createNewPlayer(userId, team);
 			room.addPlayer(newPlayer);
 			resp.getWriter().write("{\"status\" : \"success\", \"token\":\""+roomToken+"\"}");
 		}
