@@ -20,6 +20,10 @@ public class EnterServlet extends HttpServlet {
 
 		String userId = req.getParameter("id");
 		Room room = RoomMgr.getRoom("gdgSuwon");
+		if(room == null){
+			room = RoomMgr.createNewRoom("gdgSuwon");
+		}
+		
 		List<Player> players = room.getPlayers();
 		String roomToken = room.getToken();
 		Boolean samePlayer = false;

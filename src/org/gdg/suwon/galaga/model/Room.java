@@ -15,7 +15,7 @@ public class Room extends EntityData{
 	private static final String KEY_TOKEN = "TOKEN";
 	
 	private List<Key> players = new ArrayList<Key>();
-	private RoomState state = RoomState.READY;
+	private String state = RoomState.READY;
 	private String title = "GDG_SUWON";	//FIXME : Temporary room's name until implementing list.
 	private String token = null;
 	
@@ -35,7 +35,10 @@ public class Room extends EntityData{
 		super(entity_);
 		
 		players = (List<Key>)entity.getProperty(KEY_PLAYERS);
-		state = (RoomState)entity.getProperty(KEY_STATE);
+		if(players == null){
+			players = new ArrayList<Key>();
+		}
+		state = (String)entity.getProperty(KEY_STATE);
 		title = (String)entity.getProperty(KEY_STATE);
 		token = (String)entity.getProperty(KEY_TOKEN);
 	}
@@ -58,11 +61,11 @@ public class Room extends EntityData{
 		players.add(newPlayer_.toEntity().getKey());
 	}
 	
-	public void setState(RoomState newState_){
+	public void setState(String newState_){
 		state = newState_;
 	}
 	
-	public RoomState getState(){
+	public String getState(){
 		return state;
 	}
 	

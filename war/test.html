@@ -8,37 +8,38 @@
     <!--<link href="css/sdbcoaMain.css" rel="stylesheet">-->
 
     <!-- Loading Bootstrap -->
-    <link href="../war/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
 
     <!-- Loading Flat UI -->
     <!--<link href="css/flat-ui.css" rel="stylesheet">-->
     <!--<link rel="shortcut icon" href="images/favicon.ico">-->
-
+<!-- Load JS here for greater good =============================-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
 
     <script>
+    function init(){
         $('#btnPost').click(function(){
             $.ajax({
                 type: "POST",
                 url: '/enter',
-                data: {id: kabkee},
+                data: {id: "kabkee"},
                 dataType: 'json'
             }).success(function(data){
                         alert(data);
                       $('#consoleLog').append(data);
                     })
         })
-
+    }
     </script>
 </head>
-<body>
+<body onload="javascript:init();">
     <button class="btn-warning btn" id="btnPost">PostTest</button>
 
     <div id="consoleLog" class="log" style="width:60%; height: 500px; border: 2px red solid"></div>
 
 
-    <!-- Load JS here for greater good =============================-->
-    <script src="../war/js/jquery.min.js"></script>
-    <script src="../war/js/bootstrap.js"></script>
+    
 
 
     <!--[if lt IE 8]>

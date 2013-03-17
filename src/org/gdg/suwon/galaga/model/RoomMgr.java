@@ -26,7 +26,7 @@ public class RoomMgr {
 			Entity roomEntity = dataStore.get(KeyFactory.createKey(Room.class.getSimpleName(), room_));
 			retData = new Room(roomEntity);
 		} catch (EntityNotFoundException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		
 		return retData;
