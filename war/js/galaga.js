@@ -1057,16 +1057,24 @@ function onClick() {
 }
 
 /** *********** Game Ready ************ */
-var connect_btn = document.getElementById('game_ready_btn');
-connect_btn.innerHTML = "please, be Ready!";
-connect_btn.onclick = game_Ready_Click;
+var game_ready_btn = document.getElementById('game_ready_btn');
+game_ready_btn.innerHTML = "please, be Ready!";
+game_ready_btn.onclick = game_Ready_Click;
 
 function game_Ready_Click() {
-	if (connect_btn.className == "btn btn-success") {
-		connect_btn.className = "btn btn-warning";
-		connect_btn.innerHTML = "please, be Ready!";
-	} else {
-		connect_btn.className = "btn btn-success";
-		connect_btn.innerHTML = "Ready";
+	if (game_ready_btn.className == "btn btn-warning") {
+		$.ajax({
+			type : "POST",
+			url : "/ready",
+			data : {
+				id : user_id.value
+			},
+			success : function(msg) {
+				game_ready_btn.className = "btn btn-success";
+				game_ready_btn.innerHTML = "Ready";
+			},
+			error : function(xhr, status, error) {
+			}
+		});
 	}
 }
