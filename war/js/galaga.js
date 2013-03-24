@@ -113,7 +113,9 @@ jQuery(document).ready(function($) {
 	 * gameTypeClassic = false; ready(); jQuery(this).dialog("close"); } } });
 	 */
 	gameTypeClassic = true;
-	ready();
+
+//	ready(); Moved on to the login session - the very bottom of this file.
+
 });
 
 // diff is array for x diff and y diff.
@@ -192,35 +194,34 @@ function ready() {
 
 	});
 
-	// Mouse listener
-	jQuery($GALAGA_CANVAS).mousemove(function(event) {
-		setMousePosition(event);
-	});
+    // Mouse listener
+    jQuery($GALAGA_CANVAS).mousemove(function(event) {
+        setMousePosition(event);
+    });
 
-	$(document).keydown(function(event) {
-		if (!keybool) {
-			if(event.which == 13) {
-				onClick();
-				return false;
-			} else {
-				return true;
-			}
-		}
-		if (event.which == 32 && intervalLoop == 0) {
-			setStartGame(5);
-			mouse.x = 50;
-			redrawPlayerGalaga();
-		}
-		if (!isCapturing) {
-			pressedKeys[event.which] = true;
-			// console.log(event.which)
-		}
-		return false;
-	});
+    $(document).keydown(function(event) {
+        if (!keybool) {
+            if(event.which == 13) {
+                onClick();
+                return false;
+            }
+        }
+        if (event.which == 32 && intervalLoop == 0) {
+            setStartGame(5);
+            mouse.x = 50;
+            redrawPlayerGalaga();
+        }
+        if (!isCapturing) {
+            pressedKeys[event.which] = true;
+            console.log(event.which)
+        }
+        return false;
+    });
 
-	$(document).keyup(function(event) {
-		pressedKeys[event.which] = false;
-	});
+    $(document).keyup(function(event) {
+        pressedKeys[event.which] = false;
+    });
+
 }
 
 function shoot() {
@@ -433,6 +434,10 @@ function drawGalaga() {
 		luckyLife--;
 	}
 }
+function changePageState(){
+    // send & get pages every second.
+}
+
 function completeStandBy() {
 	console.log("completed merging.");
 	isGalagaMerging = false;
@@ -1044,14 +1049,21 @@ function intersectOther(a, b) {
 
 var connect_btn = document.getElementById('connectbtn');
 var user_id = document.getElementById('player_id');
+var $tempInitGame = $('#tempInitGame');
+$tempInitGame.click(function (e){
+    console.log("** initGame Button clicked it's for testing");
+    console.log("** initGame Button calls ready() ");
+    ready();
+});
+
 
 $ = jQuery;
-$('.game_play').hide();
-$('.connect_layout').show();
+//$('.game_play').hide();
+//$('.connect_layout').show();
 connect_btn.onclick = onClick;
 
-//$('.game_play').show();
-//$('.connect_layout').hide();
+$('.game_play').show();
+$('.connect_layout').hide();
 
 function onClick() {
 	$.ajax({
@@ -1064,12 +1076,15 @@ function onClick() {
 //			alert("success" + msg);
 			$('.game_play').show();
 			$('.connect_layout').hide();
+            console.log("**** Ajax /enter Success with the ID : "+ user_id.value);
 			keybool = true;
 		},
 		error : function(xhr, status, error) {
 			alert("fail");
+            console.log("**** Ajax /enter "+status);
 		}
 	});
+    keybool = false;
 }
 
 /** *********** Game Ready ************ */
@@ -1088,60 +1103,64 @@ function game_Ready_Click() {
 			success : function(msg) {
 				game_ready_btn.className = "btn btn-success";
 				game_ready_btn.innerHTML = "Ready";
+                console.log("**** Ajax /ready Success with the ID : "+ user_id.value);
+                ready();
+                console.log("**** Game Start")
 			},
 			error : function(xhr, status, error) {
+                console.log("**** Ajax /ready "+status);
 			}
 		});
 	}
 }
 
 /** channel status related function **/
-function pickupChannelMessage()
-{
-	var result = 0;
-
-	// url must be specified manually! 
-	// please consider this line to add a specific url
-
-	$.ajax (
-			{
-				type: "POST",
-				url: "/enter",
-				data : user_id.value
-			},
-			success : function(msg)
-			{
-				var obj = jQuery.parseJSON ( msg );
-				alert ( obj.status );
-
-				result = obj.status;
-			},
-			error : function ( xhr, status, error )
-			{
-				alert ( "Unknown message!" );
-				result = null;
-			}
-			);
-
-	return result;
-}
-
-function channelPageState ()
-{
-	var channelStatus = pickupChannelMessage();
-
-	// TODO : specify behavior if server message is delived.
-	switch ( serverMessage [ channelStatus ] )
-	{
-		case 0: // READY
-			break;
-		case 1: // PLAYING
-			break;
-		case 2: // END
-			break;
-		default:
-			break;
-	}
-}
+//function pickupChannelMessage()
+//{
+//	var result = 0;
+//
+//	// url must be specified manually!
+//	// please consider this line to add a specific url
+//
+//	$.ajax (
+//			{
+//				type: "POST",
+//				url: "/enter",
+//				data : user_id.value
+//			},
+//			success : function(msg)
+//			{
+//				var obj = jQuery.parseJSON ( msg );
+//				alert ( obj.status );
+//
+//				result = obj.status;
+//			},
+//			error : function ( xhr, status, error )
+//			{
+//				alert ( "Unknown message!" );
+//				result = null;
+//			}
+//			);
+//
+//	return result;
+//}
+//
+//function channelPageState ()
+//{
+//	var channelStatus = pickupChannelMessage();
+//
+//	// TODO : specify behavior if server message is delived.
+//	switch ( channelMessage [ channelStatus ] )
+//	{
+//		case 0: // READY
+//			break;
+//		case 1: // PLAYING
+//			break;
+//		case 2: // END
+//			break;
+//		default:
+//			break;
+//	}
+//}
 /* end of function list */
 

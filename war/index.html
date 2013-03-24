@@ -1,68 +1,21 @@
 <html>
 <head>
-<meta charset="utf-8" />
-<title>GDG Suwon - I'm a developer!</title>
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href='http://fonts.googleapis.com/css?family=Iceland'
-	rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <meta charset="utf-8" />
+    <title>GDG Suwon - I'm a developer!</title>
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/galaga.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
 
-<style>
-body {
-	background: #000000;
-	font-family: 'Iceland', cursive;
-	color: #FFFFFF;
-}
-
-.connect_layout {
-	background-color: #000000;
-	font-variant: normal;
-	font-style: normal;
-	font-weight: normal;
-	text-align: center;
-	padding: 10px 10px;
-	margin: 0 auto;
-	width: 400px;
-}
-
-.main_description {
-	font-size: 20px;
-}
-
-.main {
-	background-image: url(img/galaga.png);
-	background-position: top center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-}
-
-.main_text {
-	font-variant: normal;
-	font-style: normal;
-	font-weight: normal;
-	text-align: center;
-	padding: 10px 0 10px;
-	font-family: 'Iceland', cursive;
-}
-
-.main_title {
-	font-size: 70px;
-}
-
-.footer {
-	font-family: 'Iceland', cursive;
-}
-</style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="connect_layout" align="center" id="connect_layout">
-		<img src="img/galaga.png" style="margin: 10px auto;">
+	<div class="connect_layout" id="connect_layout">
+		<!--<img src="./img/galaga.png" style="margin: 10px auto;">-->
 		<h1 style="color: white; font-size: 70px;">GALAGA</h1>
 		<form class="form-inline" style="margin-top: 40px;">
-			<label style="color: white; font-size: 30px;">input ID : </label> <input
-				type="text" placeholder="id" style="height: 30px;" id="player_id">
+			<label for="player_id" style="color: white; font-size: 30px;">input ID : </label>
+            <input type="text" placeholder="id" style="height: 30px;" id="player_id">
 			<div class="btn" id="connectbtn">Connect</div>
 		</form>
 		<p class="main_description" style="color: white;">
@@ -99,6 +52,7 @@ body {
 						</tr>
 					</table>
 					<div class="btn btn-warning" style="margin-top: 20px; width: 800;" id="game_ready_btn">Ready</div>
+                    <button class="btn btn-danger" id="tempInitGame">Temp InitGame</button>
 				</div>
 				<div class="row" style="margin-top: 30px;">
 					<p class="main_description" style="color: white;">
@@ -109,7 +63,7 @@ body {
 				</div>
 			</div>
 		</div>
-		<div class="container footer" align="center">
+		<div class="container footer">
 			<h1 class="text-info">Key Buttons</h1>
 			<p style="font-size: 15px;">
 				<b style="color: red;">Arrow Key</b> : Move <br> "<b

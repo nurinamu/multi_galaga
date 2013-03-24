@@ -69,7 +69,7 @@
 		<url-pattern>/roominfo</url-pattern>
 	</servlet-mapping>
 	
-	<!-- RoomInfo -->	
+	<!-- Image -->	
 	<servlet>
 		<servlet-name>Image</servlet-name>
 		<servlet-class>org.gdg.suwon.galaga.ImageServlet</servlet-class>
@@ -79,7 +79,7 @@
 		<url-pattern>/image</url-pattern>
 	</servlet-mapping>
 	
-	<!-- RoomInfo -->	
+	<!-- Rank -->	
 	<servlet>
 		<servlet-name>Rank</servlet-name>
 		<servlet-class>org.gdg.suwon.galaga.RankServlet</servlet-class>
